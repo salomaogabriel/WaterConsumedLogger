@@ -1,0 +1,11 @@
+﻿{
+  "Waters": [
+    {
+      "Id": 1,
+      "Time": "date",
+      "WaterAmount": 4
+
+    }
+  ]
+
+}
