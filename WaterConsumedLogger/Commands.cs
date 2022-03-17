@@ -112,7 +112,7 @@ namespace WaterConsumedLogger
 
                     if (int.TryParse(input[2], out amountInmL))
                     {
-                        Log.AddWater(Water.CalculateTotalWaterAmountInBottles(amountInmL, bottles));
+                        AddWater(Water.CalculateTotalWaterAmountInBottles(amountInmL, bottles),ref continueTheProgram);
                     }
                     else
                     {
@@ -124,7 +124,7 @@ namespace WaterConsumedLogger
                 else
                 {
                     amountInmL = Config.DefaultAmountWaterInBottle;
-                    Log.AddWater(Water.CalculateTotalWaterAmountInBottles(amountInmL, bottles));
+                    AddWater(Water.CalculateTotalWaterAmountInBottles(amountInmL, bottles),ref continueTheProgram);
 
                     //The input only has the amount of bottles
                 }
@@ -146,7 +146,7 @@ namespace WaterConsumedLogger
         {
 
             Log.AddWater(amountInmL);
-
+            Console.Write("adding water");
             FileManager.CreateJsonLog(Config.LoadedFileName, ref continueTheProgram, Log);
 
         }
@@ -166,10 +166,12 @@ namespace WaterConsumedLogger
             FileManager.ChangeConfigFile(ref continueTheProgram, Config);
             Log = FileManager.LoadJson(fileName, ref continueTheProgram);
         }
-        private static void Exit(ref bool continueTheProgram)
+        private void Exit(ref bool continueTheProgram)
         {
             Console.WriteLine("Good bye!");
             continueTheProgram = false;
+            FileManager.CreateJsonLog(Config.LoadedFileName, ref continueTheProgram, Log);
+
 
         }
         private static void Help(ref bool continueTheProgram)

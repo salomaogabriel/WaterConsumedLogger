@@ -29,7 +29,9 @@ namespace WaterConsumedLogger
                 using (StreamWriter writer = new StreamWriter(path))
                 using (JsonTextWriter jsonWriter = new JsonTextWriter(writer))
                 {
+
                     serializer.Serialize(jsonWriter, log);
+
 
                 }
             }
